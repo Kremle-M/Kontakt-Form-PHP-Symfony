@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 style="text-align: center;">Kontaktujte nás</h1>
+
+    {{ form_start(form) }}
+
+    <div style="text-align: center; margin-bottom: 40px;">
+        <div>
+            {{ form_label(form.email) }}
+        </div>
+        <div>
+            {{ form_widget(form.email) }}
+        </div>
+        <div>
+            {{ form_errors(form.email) }}
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 20px;">
+        <div>
+            {{ form_label(form.message) }}
+        </div>
+        <div>
+            {{ form_widget(form.message) }}
+        </div>
+        <div>
+            {{ form_errors(form.message) }}
+        </div>
+    </div>
+
+    <div style="text-align: center;margin-bottom: 20px;">
+        {{ form_widget(form.submit) }}
+    </div>
+
+    {{ form_end(form) }}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success" style="text-align: center; margin-bottom: 10px;">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% if data %}
+        <h2 style="text-align: center;">Odeslaná data</h2>
+        <p style="text-align: center;"><strong>Email:</strong> {{ data.email }}</p>
+        <p style="text-align: center;"><strong>Zpráva:</strong> {{ data.message }}</p>
+    {% endif %}
+{% endblock %}
