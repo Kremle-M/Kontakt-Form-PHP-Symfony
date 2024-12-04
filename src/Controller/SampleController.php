@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Controller;
-
-use App\Form\ContactFormType;
 use App\Form\KontaktForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
