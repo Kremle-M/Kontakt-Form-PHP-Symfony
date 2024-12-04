@@ -10,7 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-class ContactFormType extends AbstractType
+class KontaktForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
