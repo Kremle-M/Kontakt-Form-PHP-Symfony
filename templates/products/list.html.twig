@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Seznam produktů{% endblock %}
+
+{% block body %}
+    <h1>Seznam produktů</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Externí ID</th>
+            <th>Název</th>
+            <th>Cena (CZK)</th>
+            <th>Skladem</th>
+            <th>Značka</th>
+            <th>Katalogové číslo</th>
+            <th>Prvotní vytvoření</th>
+            <th>Poslední aktualizace</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.externalId }}</td>
+                <td>{{ product.nazev }}</td>
+                <td>{{ product.cenaCZK|round(0, 'common') ~ ',-' }}</td>
+                <td>{{ product.skladem }}</td>
+                <td>{{ product.znacka }}</td>
+                <td>{{ product.getKatalogcislo }}</td>
+                <td>{{ product.vytvoreni|date('d.m.Y H:i') }}</td>
+                <td>{{ product.aktualizace|date('d.m.Y H:i') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        <span>Stránka {{ currentPage }} z {{ totalPages }}</span>
+
+        {% if currentPage > 1 %}
+            <a href="{{ path('product_list', {'page': currentPage - 1}) }}">Předchozí</a>
+        {% endif %}
+
+        {% if currentPage < totalPages %}
+            <a href="{{ path('product_list', {'page': currentPage + 1}) }}">Další</a>
+        {% endif %}
+    </div>
+{% endblock %}

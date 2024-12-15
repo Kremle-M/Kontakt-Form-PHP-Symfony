@@ -4,8 +4,22 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    api_base_url: 'https://dummyjson.com'
 services:
+    App\Scheduler\DailySyncHandler:
+        tags: [ 'scheduler.task_provider' ]
+    GuzzleHttp\Client:
+        arguments:
+            $config:
+                base_uri: '%api_base_url%'
+    App\Repository\:
+        resource: '../src/Repository'
+        autowire: true
+        autoconfigure: true
+    App\Service\ProductSyncService:
+        arguments:
+            $apiBaseUrl: '%api_base_url%'
+        autowire: true
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
